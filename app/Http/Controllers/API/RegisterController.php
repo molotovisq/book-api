@@ -37,7 +37,7 @@ class RegisterController extends BaseController
         $success['token'] =  $user->createToken('Book')->plainTextToken;
         $success['name'] =  $user->name;
 
-        return $this->sendResponse($success, 'User register successfully.');
+        //return $this->sendResponse($success, 'User register successfully.');
     }
 
     /**
