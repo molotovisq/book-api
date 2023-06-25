@@ -1,66 +1,195 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Book API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to the my Book API documentation. This API allows managing a collection of books.
 
-## About Laravel
+## Package and Version Information
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**PHP**: 8.2.7
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Laravel**: 10
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Composer:** 2.5.8 
 
-## Learning Laravel
+**MySQL**: 8.0.33
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Authentication
 
-## Laravel Sponsors
+Authentication is required to access protected API resources. To authenticate your requests, you must log in, receive your access token and include it in the authorization header of future requests.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Login - `GET` `/api/login`
 
-### Premium Partners
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `name` | `string` | **Mandatory**. Username |
+| `password` | `string` | **Mandatory**. Password |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### Request - *Example*
+```
+POST /api/login HTTP/1.1
+Host: localhost
+Content-Type: application/json
 
-## Contributing
+{
+    "name": "Teste",
+    "password": "teste1123"
+}
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Response - *Success*
 
-## Code of Conduct
+```
+{
+    "success": true,
+    "data": {
+        "token": "1|OlWyMhSHPYdun8NRNspdn3wbFpKWfUutLKCOYjkF",
+        "name": "Teste"
+    },
+    "message": "User login successfully."
+}
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Response - *Error*
+```
+{
+    "success": false,
+    "message": "Unauthorized.",
+    "data": {
+        "error": "Unauthorized"
+    }
+}
+```
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## Resources
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Authorization Header
+
+```http
+Authorization: Bearer <your_access_token>
+```
+
+Be sure to replace <your_access_token> with your valid authentication token.
+
+
+### Get all books - `GET` `/api/books`
+
+Returns all available books.
+
+```http
+GET /api/books HTTP/1.1
+Host: localhost
+Authorization: Bearer <your_access_token>
+```
+
+Parameters:
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `string` | **Mandatory**. Your access token |
+
+### Get a specific book - `GET` `/api/books/{id}`
+
+Returns details for a specific book.
+
+```http
+GET /api/books/{id} HTTP/1.1
+Host: localhost
+Authorization: Bearer <your_access_token>
+```
+Parameters:
+
+| Parameter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `string` | **Mandatory**. Your access token |
+| `id`        | `integer`   |  **Mandatory**. The ID of the book to retrieve. |
+
+### Add a new book - `POST` `/api/books`
+
+Adds a new book. 
+
+```http
+POST /api/books HTTP/1.1
+Host: localhost
+Authorization: Bearer <your_access_token>
+Content-Type: application/json
+
+{
+    "name": "Livro de Feitiços",
+    "isbn": "9744535912342",
+    "value": 230.53
+}
+```
+
+Parameters:
+
+| Parameter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `string` | **Mandatory**. Your access token |
+| `name`      | `string`   | **Mandatory**. Book name.     |
+| `isbn`      | `unsigned integer`   | **Mandatory**. Book isbn.     |
+| `value`     | `double`   | **Mandatory**. Book value.    |
+
+### Update a specific book - `PUT` `/api/books/{id}`
+
+Updates a specific book. 
+
+```http
+POST /api/books/1 HTTP/1.1
+Host: localhost
+Authorization: Bearer <your_access_token>
+Content-Type: application/json
+
+{
+    "name": "Livro de Magias",
+    "isbn": "9744535912342",
+    "value": 230.53
+}
+```
+
+Parameters:
+
+| Parameter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `string` | **Mandatory**. Your access token |
+| `{id}`        | `integer`   |  **Mandatory**. The ID of the book to update. |
+| `name`      | `string`   | **Mandatory**. Book name.     |
+| `isbn`      | `unsigned integer`   | **Mandatory**. Book isbn.     |
+| `value`     | `double`   | **Mandatory**. Book value.    |
+
+### Delete a specific book - `DELETE` `/api/books/{id}`
+
+Deletes a specific book. 
+
+```http
+DELETE /api/books/1 HTTP/1.1
+Host: localhost
+Authorization: Bearer <your_access_token>
+Content-Type: application/json
+
+```
+
+Parameters:
+
+| Parameter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `string` | **Mandatory**. Your access token |
+| `{id}`        | `integer`   |  **Mandatory**. The ID of the book to delete. |
+
+
+## Errors
+
+The API returns the following status codes and error messages:
+
+- 401 Unauthorized: The request was not authenticated or the access token is invalid.
+- 404 Not Found: The requested resource was not found.
+- 500 Internal Server Error: An internal server error occurred.
+
+
+
+## Autor
+
+- José Marcolino - [@molotovisq](https://www.github.com/molotovisq)
+

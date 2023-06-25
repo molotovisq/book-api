@@ -10,11 +10,14 @@ use App\Http\Resources\BookResource;
 
 class BookController extends BaseController
 {
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $books = Book::all();
@@ -33,7 +36,7 @@ class BookController extends BaseController
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'isbn' => ['required', 'numeric'],
+            'isbn' => ['required', 'integer'],
             'value' => ['required', 'numeric']
         ]);
 
@@ -72,16 +75,17 @@ class BookController extends BaseController
      */
     public function update(Request $request, Book $book)
     {
+
         $input = $request->all();
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'isbn' => 'numeric',
-            'value' => 'decimal'
+            'isbn' => ['required', 'integer'],
+            'value' => ['required', 'numeric']
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+            return $this->sendError('Validation Error.', $validator->errors(), $code = 400);
         }
 
         $book->name = $input['name'];
@@ -100,8 +104,12 @@ class BookController extends BaseController
      */
     public function destroy(Book $book)
     {
-        $book->delete();
+        if (isset($book)) {
+            $book->delete();
 
-        return $this->sendResponse([], 'Book deleted successfully.');
+            return $this->sendResponse([], 'Book deleted successfully.');
+        } else {
+            return $this->sendResponse([], 'Book not found');
+        }
     }
 }

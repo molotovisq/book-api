@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: 'Book API'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://192.168.18.45:8000'
+paths:
+  /api/register:
+    post:
+      summary: 'Register api'
+      operationId: registerApi
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: impedit
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: delmer98@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: nulla
+                c_password:
+                  type: string
+                  description: 'The value and <code>password</code> must match.'
+                  example: doloremque
+              required:
+                - name
+                - email
+                - password
+                - c_password
+      security: []
+  /api/login:
+    post:
+      summary: 'Login api'
+      operationId: loginApi
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/logout:
+    post:
+      summary: ''
+      operationId: postApiLogout
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/books:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: natus
+                isbn:
+                  type: number
+                  description: ''
+                  example: 468471554.022
+                value:
+                  type: number
+                  description: ''
+                  example: 75.7357
+              required:
+                - name
+                - isbn
+                - value
+      security: []
+  '/api/books/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: impedit
+                isbn:
+                  type: number
+                  description: ''
+                  example: 4506.786956
+                value:
+                  type: number
+                  description: ''
+                  example: 73009356.486686
+              required:
+                - name
+                - isbn
+                - value
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the book.'
+        example: vel
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []
