@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('isbn');
+            $table->double('value');
             $table->timestamps();
         });
     }
