@@ -14,6 +14,53 @@ Welcome to the my Book API documentation. This API allows managing a collection 
 
 
 
+
+## Running locally
+
+Clone the project
+
+```bash
+git clone https://github.com/molotovisq/book-api
+
+```
+
+Enter on the project directory
+
+```bash
+cd book-api
+```
+
+Move the and install the linux-dependencies script out of the folder
+```bash
+mv book-api-installer.sh ../
+cd ..
+bash book-api-installer.sh
+```
+
+Enter again on the project directory
+
+```bash
+cd book-api
+```
+
+Install the composer dependencies
+
+```bash
+composer install
+```
+
+Copy the .env variable and fill in the MySQL DB fields
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Run the migrations
+
+```bash
+php artisan migrate
+```
+
 ## Authentication
 
 Authentication is required to access protected API resources. To authenticate your requests, you must log in, receive your access token and include it in the authorization header of future requests.
