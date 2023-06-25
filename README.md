@@ -20,7 +20,7 @@ Authentication is required to access protected API resources. To authenticate yo
 
 ### Login - `GET` `/api/login`
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
 | `name` | `string` | **Mandatory**. Username |
 | `password` | `string` | **Mandatory**. Password |
@@ -63,7 +63,7 @@ Content-Type: application/json
 
 ### Logout - `POST` `/api/logout`
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter  | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
 | `Authorization` | `string` | **Mandatory**. Your access token |
 
@@ -91,7 +91,7 @@ Authorization: Bearer <your_access_token>
 
 Parameters:
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
 | `Authorization` | `string` | **Mandatory**. Your access token |
 
