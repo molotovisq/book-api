@@ -61,6 +61,11 @@ Content-Type: application/json
 }
 ```
 
+### Logout - `POST` `/api/logout`
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `string` | **Mandatory**. Your access token |
 
 
 ## Resources
@@ -189,7 +194,7 @@ The API returns the following status codes and error messages:
 
 
 
-## Autor
+## Author
 
 - José Marcolino - [@molotovisq](https://www.github.com/molotovisq)
 
